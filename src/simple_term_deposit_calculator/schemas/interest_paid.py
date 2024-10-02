@@ -6,3 +6,10 @@ class InterestPaid(Enum):
     QUARTERLY = "QUARTERLY"
     ANNUALLY = "ANNUALLY"
     AT_MATURITY = "AT_MATURITY"
+
+
+COMPOUNDING_FREQUENCIES = {
+    InterestPaid.MONTHLY: 12,
+    InterestPaid.QUARTERLY: 4,
+    InterestPaid.ANNUALLY: 1,
+}
