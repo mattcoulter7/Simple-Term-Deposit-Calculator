@@ -109,7 +109,7 @@ To incorporate this package into your own Python application, add it as a depend
 
 Install the package using pip as a Git dependency:
 ```bash
-pip install "git+https://github.com/mattcoulter7/mclib.sdk.python-template@master"
+pip install "git+https://github.com/mattcoulter7/Simple-Term-Deposit-Calculator@master"
 ```
 
 ### Usage Example
