@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "mclib-sdk-python-template"
+description = "Template repository for MCLib SDK Python Packages"
+version = "0.0.0"
+authors = ["Matthew Coulter <mattcoul7@gmail.com>"]
+readme = "README.md"
+packages = [{ include = "mclib", from = "src" }]
+
+[tool.poetry.dependencies]
+python = ">=3.9"
+typer = "0.12.5"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.3.3"
+debugpy = "^1.8.6"
+pyinstaller = "*"
+
+[tool.poetry.scripts]
+mclib_template = "mclib.template.cli:main"
