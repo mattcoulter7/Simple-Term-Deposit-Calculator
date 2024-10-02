@@ -120,7 +120,7 @@ Then, you can use the code as shown below:
 from simple_term_deposit_calculator.calculator import SimpleTermDepositCalculator
 
 # 2. Import the InterestPaid enum
-from simple_term_deposit_calculator.schema.interest_paid import InterestPaid
+from simple_term_deposit_calculator.schemas.interest_paid import InterestPaid
 
 # 3. Create a calculator instance
 calculator = SimpleTermDepositCalculator()
