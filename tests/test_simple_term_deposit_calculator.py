@@ -32,4 +32,3 @@ def test_simple_term_deposit_calculator(
     # for decimal comparison, we will use an approximation
     assert expected_final_balance == pytest.approx(expected_final_balance, rel=1e-2), \
         f"Incorrect calculation for {interest_paid}, expected {expected_final_balance}, calculated {actual_final_balance}"
-
