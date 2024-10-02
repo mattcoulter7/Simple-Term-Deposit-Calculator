@@ -8,6 +8,9 @@ from simple_term_deposit_calculator.calculator import SimpleTermDepositCalculato
     "deposit_amount, interest_rate, investment_term, interest_paid, expected_final_balance",
     [
         (10_000, 0.011, 36, InterestPaid.AT_MATURITY, 10_330),  # example given from requirements.pdf
+        (10_000, 0.011, 36, InterestPaid.MONTHLY, 10_335),
+        (10_000, 0.011, 36, InterestPaid.QUARTERLY, 10_335),
+        (10_000, 0.011, 36, InterestPaid.ANNUALLY, 10_334),
     ]
 )
 def test_simple_term_deposit_calculator(
