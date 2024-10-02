@@ -1,6 +1,7 @@
 import pytest
 
 from simple_term_deposit_calculator.schemas.interest_paid import InterestPaid
+from simple_term_deposit_calculator.calculator import SimpleTermDepositCalculator
 
 
 @pytest.mark.parametrize(
@@ -16,4 +17,16 @@ def test_simple_term_deposit_calculator(
     interest_paid: InterestPaid,
     expected_final_balance: float,
 ):
-    raise NotImplementedError()
+    calculator = SimpleTermDepositCalculator()
+
+    actual_final_balance = calculator.calculate(
+        deposit_amount=deposit_amount,
+        interest_rate=interest_rate,
+        investment_term=investment_term,
+        interest_paid=interest_paid,
+    )
+
+    # for decimal comparison, we will use an approximation
+    assert expected_final_balance == pytest.approx(expected_final_balance, rel=1e-2), \
+        f"Incorrect calculation for {interest_paid}, expected {expected_final_balance}, calculated {actual_final_balance}"
+
