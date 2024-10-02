@@ -1,6 +1,7 @@
 import typer
 
-from mclib.template.sample import *  # TODO: update this
+from simple_term_deposit_calculator.calculator import *
+from simple_term_deposit_calculator.schemas import *
 
 main = typer.Typer()
 

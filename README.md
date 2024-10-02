@@ -1,4 +1,4 @@
-# mclib-sdk-python-template
+# simple-term-deposit-calculator
 This repository is a template for `mclib` packages, available both as a Command-Line Interface (CLI) and as a Python Package Dependency.
 
 ## Running the Application
@@ -38,8 +38,8 @@ To run this application, we assume you have the following setup system environme
 ### How to run the code
 Start by cloning this repository:
 ```bash
-git clone https://github.com/mattcoulter7/mclib-sdk-python-template
-cd mclib-sdk-python-template
+git clone https://github.com/mattcoulter7/simple-term-deposit-calculator
+cd simple-term-deposit-calculator
 ```
 
 #### CLI

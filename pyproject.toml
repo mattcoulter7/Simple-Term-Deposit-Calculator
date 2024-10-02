@@ -1,10 +1,10 @@
 [tool.poetry]
-name = "mclib-sdk-python-template"
-description = "Template repository for MCLib SDK Python Packages"
+name = "simple-term-deposit-calculator"
+description = ""
 version = "0.0.0"
 authors = ["Matthew Coulter <mattcoul7@gmail.com>"]
 readme = "README.md"
-packages = [{ include = "mclib", from = "src" }]
+packages = [{ include = "simple_term_deposit_calculator", from = "src" }]
 
 [tool.poetry.dependencies]
 python = ">=3.9"
@@ -16,4 +16,5 @@ debugpy = "^1.8.6"
 pyinstaller = "*"
 
 [tool.poetry.scripts]
-mclib_template = "mclib.template.cli:main"
+stdc = "simple_term_deposit_calculator.application.cli:main"
+simple_term_deposit_calculator = "simple_term_deposit_calculator.application.cli:main"

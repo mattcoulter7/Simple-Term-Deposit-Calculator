@@ -8,7 +8,7 @@
       "name": "cli",
       "type": "debugpy",
       "request": "launch",
-      "program": "src/mclib/template/application/cli.py",
+      "program": "src/simple_term_deposit_calculator/application/cli.py",
       "console": "integratedTerminal"
     },
     {

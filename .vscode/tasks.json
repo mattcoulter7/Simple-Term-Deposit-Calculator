@@ -33,10 +33,10 @@
             "args": [
                 "run",
                 "pyinstaller",
-                "--name", "mclib-template",
+                "--name", "Simple Term Deposit Calculator",
                 "--icon=assets/icon.ico",
                 "--onefile",
-                "src/mclib/template/application/cli.py"
+                "src/simple_term_deposit_calculator/application/cli.py"
             ],
             "problemMatcher": [],
             "group": {
