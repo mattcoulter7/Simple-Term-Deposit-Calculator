@@ -1,15 +1,19 @@
 import pytest
 
+from simple_term_deposit_calculator.schemas.interest_paid import InterestPaid
+
 
 @pytest.mark.parametrize(
-    "input_1, input_2, expected_output",
+    "deposit_amount, interest_rate, investment_term, interest_paid, expected_final_balance",
     [
-        ("some_string", 12345, None),
+        (10_000, 0.011, 36, InterestPaid.AT_MATURITY, 10_330),  # example given from requirements.pdf
     ]
 )
-def test_template(
-    input_1: str,
-    input_2: float,
-    expected_output: None,
+def test_simple_term_deposit_calculator(
+    deposit_amount: float,
+    interest_rate: float,
+    investment_term: int,
+    interest_paid: InterestPaid,
+    expected_final_balance: float,
 ):
     raise NotImplementedError()
