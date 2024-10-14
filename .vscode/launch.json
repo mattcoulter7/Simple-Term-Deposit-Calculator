@@ -21,6 +21,18 @@
       "console": "integratedTerminal",
     },
     {
+      "name": "pytest: current file",
+      "type": "python",
+      "request": "launch",
+      "module": "pytest",
+      "args": [
+        "${relativeFile}"  // This ensures that the currently opened file in the editor is tested.
+      ],
+      "justMyCode": false,
+      "console": "integratedTerminal",
+      "cwd": "${workspaceFolder}"
+    },
+    {
       "name": "debug docker test container",
       "type": "python",
       "request": "attach",
