@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "simple-term-deposit-calculator"
 description = ""
-version = "0.0.1"
+version = "0.1.0"
 authors = ["Matthew Coulter <mattcoul7@gmail.com>"]
 readme = "README.md"
 packages = [{ include = "simple_term_deposit_calculator", from = "src" }]
@@ -9,6 +9,7 @@ packages = [{ include = "simple_term_deposit_calculator", from = "src" }]
 [tool.poetry.dependencies]
 python = ">=3.9"
 typer = "0.12.5"
+werkzeug = "^3.0.6"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.3.3"

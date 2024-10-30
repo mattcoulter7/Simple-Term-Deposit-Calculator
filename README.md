@@ -117,10 +117,10 @@ pip install "git+https://github.com/mattcoulter7/Simple-Term-Deposit-Calculator@
 Then, you can use the code as shown below:
 ```python
 # 1. Import the calculator
-from simple_term_deposit_calculator.calculator import SimpleTermDepositCalculator
+from simple_term_deposit_calculator.calculator.simple import SimpleTermDepositCalculator
 
 # 2. Import the InterestPaid enum
-from simple_term_deposit_calculator.schema.interest_paid import InterestPaid
+from simple_term_deposit_calculator.schemas.interest_paid import get_interest_paid_rule
 
 # 3. Create a calculator instance
 calculator = SimpleTermDepositCalculator()
@@ -128,9 +128,9 @@ calculator = SimpleTermDepositCalculator()
 # 4. Compute the term deposit
 final_balance = calculator.calculate(
     deposit_amount=10000,      # float
-    interest_rate=1.1,         # float
+    interest_rate=0.011,         # float
     investment_term=36,        # int (in months)
-    interest_paid=InterestPaid.AT_MATURITY  # Enum: MONTHLY, QUARTERLY, ANNUALLY, AT_MATURITY
+    interest_paid=get_interest_paid_rule("AT_MATURITY")  # support values: MONTHLY, QUARTERLY, ANNUALLY, AT_MATURITY
 )
 ```
 
