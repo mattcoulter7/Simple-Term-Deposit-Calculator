@@ -43,8 +43,8 @@ To run this application, the following system environment setup is assumed:
 
 Start by cloning this repository:
 ```bash
-git clone https://github.com/mattcoulter7/Simple-Term-Deposit-Calculator
-cd Simple-Term-Deposit-Calculator
+git clone https://github.com/mattcoulter7/Up-Bank-Ferocia-Code-Challenge-Simple-Term-Deposit-Calculator
+cd Up-Bank-Ferocia-Code-Challenge-Simple-Term-Deposit-Calculator
 ```
 
 #### CLI
