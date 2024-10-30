@@ -1,7 +1,7 @@
 import pytest
 
 from simple_term_deposit_calculator.schemas.interest_paid import InterestPaid
-from simple_term_deposit_calculator.calculator import SimpleTermDepositCalculator
+from simple_term_deposit_calculator.calculator.simple import SimpleTermDepositCalculator
 
 
 @pytest.mark.parametrize(
@@ -22,7 +22,7 @@ def test_simple_term_deposit_calculator(
 ):
     calculator = SimpleTermDepositCalculator()
 
-    actual_final_balance = calculator.calculate(
+    actual_final_balance = calculator.calculate_final_balance(
         deposit_amount=deposit_amount,
         interest_rate=interest_rate,
         investment_term=investment_term,

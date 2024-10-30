@@ -11,7 +11,7 @@ runner = CliRunner()
 @pytest.mark.parametrize(
     "deposit_amount, interest_rate, investment_term, interest_paid, expected_final_balance",
     [
-        ("10000", "1.1", "36", "AT_MATURITY", "10330.00"),  # example given from requirements.pdf, but in cli format
+        ("10000", "1.1", "36", "MONTHLY", "10330.00"),  # example given from requirements.pdf, but in cli format
     ]
 )
 def test_cli(

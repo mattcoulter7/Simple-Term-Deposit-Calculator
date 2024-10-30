@@ -1,11 +1,39 @@
 import typer
+from typing import List
 
-from simple_term_deposit_calculator.calculator import SimpleTermDepositCalculator
+from simple_term_deposit_calculator.calculator.simple import SimpleTermDepositCalculator
 from simple_term_deposit_calculator.schemas.interest_paid import InterestPaid
+from simple_term_deposit_calculator.schemas.projected_savings import ProjectedSavingsIteration
 
 
 # Create the Typer app instance
 main = typer.Typer()
+
+
+def echo_projected_savings(
+    projected_savings: List[ProjectedSavingsIteration],
+) -> None:
+    def echo_projected_savings_iteration(
+        iteration: ProjectedSavingsIteration,
+    ):
+        readable_interest_rate = iteration.interest_rate * 100
+        # Month	| Extra deposits | Interest Rate | Interest earned | Balance
+        typer.echo(
+            f"{iteration.month} " + 
+            f" | {iteration.extra_deposits:.2f}" + 
+            f" | {readable_interest_rate}%" + 
+            f" | ${iteration.interest_earned:.2f}" + 
+            f" | ${iteration.balance:.2f}"
+        )
+
+    typer.echo(
+        f"Month	| Extra deposits | Interest Rate | Interest earned | Balance"
+    )
+    for iteration in projected_savings:
+        echo_projected_savings_iteration(iteration)
+
+    return None
+
 
 # Function to calculate the term deposit using named parameters or prompts
 @main.command()
@@ -41,16 +69,25 @@ def calculate_term_deposit(
     # create the calculator
     calculator = SimpleTermDepositCalculator()
 
-    # perform the calculation
-    final_balance = calculator.calculate(
+    # perform the calculation for final balance
+    final_balance = calculator.calculate_final_balance(
         deposit_amount=deposit_amount,
         interest_rate=interest_rate / 100,  # normalise percentage between 0 and 1
         investment_term=investment_term,
         interest_paid=interest_paid,
     )
-
-    # output the result
+    # output the final balance
     typer.echo(f"Final balance after {investment_term} months: ${final_balance:.2f}")
+
+    # perform the calculation for projected balance
+    projected_savings = calculator.calculate_projected_savings(
+        deposit_amount=deposit_amount,
+        interest_rate=interest_rate / 100,  # normalise percentage between 0 and 1
+        investment_term=investment_term,
+        interest_paid=interest_paid,
+    )
+    # output the projected savings
+    echo_projected_savings(projected_savings)
 
     # simple approach to prevent the window from closing immediately
     typer.prompt("Press Enter to exit...", default="", show_default=False)

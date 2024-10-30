@@ -117,7 +117,7 @@ pip install "git+https://github.com/mattcoulter7/Simple-Term-Deposit-Calculator@
 Then, you can use the code as shown below:
 ```python
 # 1. Import the calculator
-from simple_term_deposit_calculator.calculator import SimpleTermDepositCalculator
+from simple_term_deposit_calculator.calculator.simple import SimpleTermDepositCalculator
 
 # 2. Import the InterestPaid enum
 from simple_term_deposit_calculator.schemas.interest_paid import InterestPaid

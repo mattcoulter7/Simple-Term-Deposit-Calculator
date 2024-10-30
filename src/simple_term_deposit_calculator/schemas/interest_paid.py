@@ -13,3 +13,8 @@ COMPOUNDING_FREQUENCIES = {
     InterestPaid.QUARTERLY: 4,
     InterestPaid.ANNUALLY: 1,
 }
+
+
+class InterestPaidRule:
+    label: str
+    frequency: int
