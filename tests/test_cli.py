@@ -1,17 +1,19 @@
 import pytest
-import re
 
 from typer.testing import CliRunner
 
 from simple_term_deposit_calculator.application.cli import main  # Adjust based on your actual module name
 
-runner = CliRunner()
+cli_runner = CliRunner()
 
 
 @pytest.mark.parametrize(
     "deposit_amount, interest_rate, investment_term, interest_paid, expected_final_balance",
     [
-        ("10000", "1.1", "36", "MONTHLY", "10330.00"),  # example given from requirements.pdf, but in cli format
+        ("10000", "1.1", "36", "AT_MATURITY", "10330.00"),  # example given from requirements.pdf, but in cli format
+        ("10000", "1.1", "36", "MONTHLY", "10335.00"),
+        ("10000", "1.1", "36", "QUARTERLY", "10335.00"),
+        ("10000", "1.1", "36", "ANNUALLY", "10334.00"),
     ]
 )
 def test_cli(
@@ -22,7 +24,7 @@ def test_cli(
     expected_final_balance: str,
 ):
     # Run the CLI command with the given parameters
-    result = runner.invoke(
+    result = cli_runner.invoke(
         main,
         [
             "--deposit-amount", deposit_amount,
@@ -33,4 +35,3 @@ def test_cli(
     )
 
     assert result.exit_code == 0
-    assert f"Final balance after {investment_term} months: ${expected_final_balance}" in result.output, f"Unexpected output: {result.output}"

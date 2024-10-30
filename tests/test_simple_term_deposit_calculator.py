@@ -1,23 +1,23 @@
 import pytest
 
-from simple_term_deposit_calculator.schemas.interest_paid import InterestPaid
+from simple_term_deposit_calculator.schemas.interest_paid import get_interest_paid_rule
 from simple_term_deposit_calculator.calculator.simple import SimpleTermDepositCalculator
 
 
 @pytest.mark.parametrize(
     "deposit_amount, interest_rate, investment_term, interest_paid, expected_final_balance",
     [
-        (10_000, 0.011, 36, InterestPaid.AT_MATURITY, 10_330),  # example given from requirements.pdf
-        (10_000, 0.011, 36, InterestPaid.MONTHLY, 10_335),
-        (10_000, 0.011, 36, InterestPaid.QUARTERLY, 10_335),
-        (10_000, 0.011, 36, InterestPaid.ANNUALLY, 10_334),
+        (10_000, 0.011, 36, "AT_MATURITY", 10_330),  # example given from requirements.pdf
+        (10_000, 0.011, 36, "MONTHLY", 10_335),
+        (10_000, 0.011, 36, "QUARTERLY", 10_335),
+        (10_000, 0.011, 36, "ANNUALLY", 10_334),
     ]
 )
 def test_simple_term_deposit_calculator(
     deposit_amount: float,
     interest_rate: float,
     investment_term: int,
-    interest_paid: InterestPaid,
+    interest_paid: str,
     expected_final_balance: float,
 ):
     calculator = SimpleTermDepositCalculator()
@@ -26,7 +26,7 @@ def test_simple_term_deposit_calculator(
         deposit_amount=deposit_amount,
         interest_rate=interest_rate,
         investment_term=investment_term,
-        interest_paid=interest_paid,
+        interest_paid_rule=get_interest_paid_rule(interest_paid),
     )
 
     # for decimal comparison, we will use an approximation

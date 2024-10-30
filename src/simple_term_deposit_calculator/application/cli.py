@@ -1,10 +1,14 @@
 import typer
 from typing import List
+from werkzeug.exceptions import NotFound
 
+from simple_term_deposit_calculator.schemas.interest_paid import (
+    BaseInterestPaidRule,
+    get_interest_paid_labels,
+    get_interest_paid_rule,
+)
 from simple_term_deposit_calculator.calculator.simple import SimpleTermDepositCalculator
-from simple_term_deposit_calculator.schemas.interest_paid import InterestPaid
 from simple_term_deposit_calculator.schemas.projected_savings import ProjectedSavingsIteration
-
 
 # Create the Typer app instance
 main = typer.Typer()
@@ -35,6 +39,15 @@ def echo_projected_savings(
     return None
 
 
+def validate_interest_paid(interest_paid: str) -> str:
+    allowed_labels = get_interest_paid_labels()
+    try:
+        assert interest_paid in allowed_labels
+    except AssertionError:
+        raise typer.BadParameter(f"Invalid option. Choose from: {', '.join(allowed_labels)}")
+
+    return interest_paid
+
 # Function to calculate the term deposit using named parameters or prompts
 @main.command()
 def calculate_term_deposit(
@@ -59,22 +72,25 @@ def calculate_term_deposit(
         min=3,
         max=60,
     ),
-    interest_paid: InterestPaid = typer.Option(
+    interest_paid: str = typer.Option(
         ...,
-        prompt=f"How the interest is paid",
-        help=f"How the interest is paid",
-        show_choices=True,
+        prompt=f"How the interest is paid ({', '.join(get_interest_paid_labels())})",
+        help=f"How the interest is paid ({', '.join(get_interest_paid_labels())})",
+        callback=validate_interest_paid,
     ),
 ):
     # create the calculator
     calculator = SimpleTermDepositCalculator()
+
+    # look up the interest paid rule
+    interest_paid_rule = get_interest_paid_rule(interest_paid)
 
     # perform the calculation for final balance
     final_balance = calculator.calculate_final_balance(
         deposit_amount=deposit_amount,
         interest_rate=interest_rate / 100,  # normalise percentage between 0 and 1
         investment_term=investment_term,
-        interest_paid=interest_paid,
+        interest_paid_rule=interest_paid_rule,
     )
     # output the final balance
     typer.echo(f"Final balance after {investment_term} months: ${final_balance:.2f}")
@@ -84,7 +100,7 @@ def calculate_term_deposit(
         deposit_amount=deposit_amount,
         interest_rate=interest_rate / 100,  # normalise percentage between 0 and 1
         investment_term=investment_term,
-        interest_paid=interest_paid,
+        interest_paid_rule=interest_paid_rule,
     )
     # output the projected savings
     echo_projected_savings(projected_savings)
